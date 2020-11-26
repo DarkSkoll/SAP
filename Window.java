@@ -1,17 +1,16 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
 
 public class Window{
     private JFrame window;
-    private JTable table;
+    private Table table;
     private JLabel title;
 
     public Window(){
         window = new JFrame();
-        table = new JTable(6,20);
+        table = new Table(6,20);
         title = new JLabel("Simulador de Algoritmo de Planificación SAP");
     }
 
@@ -23,7 +22,8 @@ public class Window{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void setDefaultTableProperties(){
+    private void setTableProperties(){
+        table.setDefaults();
         table.setBounds(20,110,1560,300);
         table.setEnabled(false);
     }
@@ -43,7 +43,7 @@ public class Window{
 
     public void createWindow(){
         setDefaultWindowsProperties();
-        setDefaultTableProperties();
+        setTableProperties();
         setDefaultTitleProperties();
         addWindowsElements();
     }
