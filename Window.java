@@ -1,21 +1,31 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Window{
+public class Window implements ActionListener{
     private JFrame window;
     private JLabel title;
     private ResultsTableGui results;
     private TableTimeGui time;
     private InformationGui info;
+    private JComboBox<String> selector;
+    private JButton start;
+    //private Simulator simulador;
 
-    public Window(){
+    public Window(/*Simulator simulador*/){
         window = new JFrame();
         title = new JLabel();
         results = new ResultsTableGui();
         time = new TableTimeGui();
         info = new InformationGui();
+        selector = new JComboBox<String>();
+        start = new JButton("Iniciar");
+        //this.simulador = simulador;
     }
 
     private void setDefaultWindowsProperties(){
@@ -33,6 +43,26 @@ public class Window{
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         title.setFont(new Font("Mono", Font.BOLD, 36));
+    }
+
+    private void setDefaultSelectorProperties(){
+        selector.setBounds(200,200,200,30);
+        selector.addItem("FCFS");
+        selector.addItem("SJF");
+        selector.addItem("SRT");
+        selector.addItem("Round Robin");
+        selector.addItem("Prioridades");
+        //selector.addActionListener(this);
+    }
+
+    private void setDefaultStartProperties(){
+        start.setBounds(400,400,200,30);
+        start.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Hola");
+        System.out.println(selector.getSelectedItem().toString());
     }
 
     private void setDefaultResultsTableProperties(){
@@ -55,6 +85,8 @@ public class Window{
         window.add(results);
         window.add(time);
         window.add(info);
+        window.add(selector);
+        window.add(start);
     }
 
     public void createWindow(){
@@ -63,6 +95,8 @@ public class Window{
         setDefaultResultsTableProperties();
         setDefaultTimeProperties();
         setDefaultInfoProperties();
+        setDefaultStartProperties();
+        setDefaultSelectorProperties();
         addWindowsElements();
     }
 }

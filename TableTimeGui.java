@@ -15,7 +15,7 @@ public class TableTimeGui extends JPanel{
 
     public TableTimeGui(){
         super();
-        table = new JTable(3,43);
+        table = new JTable(3,203);
         scroll = new JScrollPane(table);
         L = new JLabel("L:");
         U = new JLabel("U:");

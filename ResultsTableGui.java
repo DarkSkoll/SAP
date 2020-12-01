@@ -12,7 +12,7 @@ public class ResultsTableGui extends JPanel{
 
     public ResultsTableGui(){
         super();
-        table = new JTable(10,11);
+        table = new JTable(20,11);
         scroll = new JScrollPane(table);
     }
 
