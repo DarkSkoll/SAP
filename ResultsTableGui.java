@@ -1,7 +1,10 @@
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Color;
 
 public class ResultsTableGui extends JPanel{
     private JTable table;
@@ -20,6 +23,7 @@ public class ResultsTableGui extends JPanel{
         setDefaultHeader();
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setBounds(0,0,1500,350);
+        centrar();
         this.setLayout(null);
         this.add(scroll);
     }
@@ -39,5 +43,15 @@ public class ResultsTableGui extends JPanel{
         table.getTableHeader().setFont(new Font("Mono",Font.PLAIN,16));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setBackground(Color.black);
+        table.getTableHeader().setForeground(Color.white);
+    }
+
+    public void centrar(){
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for(int i = 0; i < table.getColumnCount(); i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
     }
 }

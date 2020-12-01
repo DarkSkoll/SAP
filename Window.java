@@ -7,11 +7,15 @@ public class Window{
     private JFrame window;
     private JLabel title;
     private ResultsTableGui results;
+    private TableTimeGui time;
+    private InformationGui info;
 
     public Window(){
         window = new JFrame();
         title = new JLabel();
         results = new ResultsTableGui();
+        time = new TableTimeGui();
+        info = new InformationGui();
     }
 
     private void setDefaultWindowsProperties(){
@@ -24,7 +28,7 @@ public class Window{
 
     private void setDefaultTitleProperties(){
         title.setText("Simulador de Algoritmos Planificadores");
-        title.setBounds(0,0,1500,100);
+        title.setBounds(0,0,1600,100);
         title.setForeground(Color.white);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
@@ -36,15 +40,29 @@ public class Window{
         results.setBounds(50,500,1500,350);
     }
 
+    private void setDefaultTimeProperties(){
+        time.setDefaults();
+        time.setBounds(850,125,700,108);
+    }
+
+    private void setDefaultInfoProperties(){
+        info.setDefaults();
+        info.setBounds(850,250,700,108);
+    }
+
     private void addWindowsElements(){
         window.add(title);
         window.add(results);
+        window.add(time);
+        window.add(info);
     }
 
     public void createWindow(){
         setDefaultWindowsProperties();
         setDefaultTitleProperties();
         setDefaultResultsTableProperties();
+        setDefaultTimeProperties();
+        setDefaultInfoProperties();
         addWindowsElements();
     }
 }

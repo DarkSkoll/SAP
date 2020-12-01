@@ -3,5 +3,7 @@ public class Launcher{
         Window window = new Window();
         window.createWindow();
         ResultsTableGui pardo;
+        TableTimeGui toto;
+        InformationGui toe;
     }
 }
