@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Launcher{
     public static void main(String[] args) {
         Loader cargador = new Loader("ejercicio1.txt");
+        Window ventana = new Window();
+        ventana.createWindow();
         ArrayList<Process> procesos = null;
         try{
             procesos = cargador.cargarProcesos();
