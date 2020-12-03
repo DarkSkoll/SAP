@@ -15,9 +15,12 @@ public class Launcher{
             System.out.println(procesos.get(i).toString());
         }
         simulador.ordenarPorLlegada();
-        System.out.println("\n");
         for(int i = 0; i < procesos.size(); i++){
             System.out.println(procesos.get(i).toString());
+        }
+        simulador.start();
+        for(int i = 0; i < procesos.size(); i++){
+            procesos.get(i).imprimir();
         }
     }
 }

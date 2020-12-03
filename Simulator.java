@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class Simulator{
     public ArrayList<Process> procesos;
-    private ArrayList<Results> resultados;
-    private int time;
-    private Process current;
+    public int time;
+    public Process current;
+    public Runable algoritmo;
 
     public Simulator(ArrayList<Process> procesos){
         this.procesos = procesos;
+        time = 0;
+        current = null;
     }
 
     public void compute(){
@@ -31,36 +33,62 @@ public class Simulator{
         }
     }
 
-    public void calcularPromedio(){
+    public void recibirProcesos(){
+        Process tmp;
+        for(int i = 0; i < procesos.size(); i++){
+            tmp = procesos.get(i);
+            if(tmp.getArriveTime() == time){
+                algoritmo.encolar(tmp);
+            }
+        }
+    }
+
+    public boolean isFinish(){
+        Process tmp;
+        for(int i = 0; i < procesos.size(); i++){
+            tmp = procesos.get(i);
+            if(!tmp.isDone()) return false;
+        }
+        return true;
+    }
+
+    public void calcularResultados(){
         float output = 0;
         float response = 0;
         float waste = 0;
         float penalty = 0;
         float wait = 0;
-        Results tmp;
-        for(int i = 0; i < resultados.size(); i++){
-            tmp = resultados.get(i);
+        Process tmp;
+        for(int i = 0; i < procesos.size(); i++){
+            tmp = procesos.get(i);
+            tmp.calculate();
             output += tmp.getOutput();
             response += tmp.getResponse();
             waste += tmp.getWaste();
             penalty += tmp.getPenalty();
             wait += tmp.getWait();
         }
-        resultados.add(new Results("Total",output,response,waste,penalty,wait));
-        output /= resultados.size();
-        response /= resultados.size();
-        waste /= resultados.size();
-        penalty /= resultados.size();
-        wait /= resultados.size();
-        resultados.add(new Results("Promedio",output,response,waste,penalty,wait));
+        procesos.add(new Process("Total",output,response,waste,penalty,wait));
+        output /= (procesos.size()-1);
+        response /= (procesos.size()-1);
+        waste /= (procesos.size()-1);
+        penalty /= (procesos.size()-1);
+        wait /= (procesos.size()-1);
+        procesos.add(new Process("Promedio",output,response,waste,penalty,wait));
     }
 
     public void reset(){
         current = null;
         time = 0;
-        resultados = new ArrayList<Results>();
         for(int i = 0; i < procesos.size(); i++){
             procesos.get(i).reset();
         }
+    }
+
+    public void start(){
+        reset();
+        algoritmo = new FCFS(this);
+        algoritmo.run();
+        calcularResultados();
     }
 }

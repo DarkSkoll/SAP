@@ -26,8 +26,8 @@ public class Loader{
             tmpProcess = tmp.split(",");
             id = tmpProcess[0];
             priority = Integer.parseInt(tmpProcess[1]);
-            duration = Integer.parseInt(tmpProcess[2]);
-            arriveTime = Integer.parseInt(tmpProcess[3]);
+            duration = Integer.parseInt(tmpProcess[3]);
+            arriveTime = Integer.parseInt(tmpProcess[2]);
             procesos.add(new Process(id,priority,duration,arriveTime));
         }
         return procesos;
