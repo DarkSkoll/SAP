@@ -15,9 +15,8 @@ public class Window implements ActionListener{
     private InformationGui info;
     private JComboBox<String> selector;
     private JButton start;
-    private Simulator simulador;
 
-    public Window(Simulator simulador){
+    public Window(){
         window = new JFrame();
         title = new JLabel();
         results = new ResultsTableGui();
@@ -25,7 +24,6 @@ public class Window implements ActionListener{
         info = new InformationGui();
         selector = new JComboBox<String>();
         start = new JButton("Iniciar");
-        this.simulador = simulador;
     }
 
     private void setDefaultWindowsProperties(){
