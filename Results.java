@@ -2,11 +2,22 @@ public class Results{
     private Process process;
     private int startTime;
     private int endTime;
-    private int output;
-    private int response;
-    private int waste;
+    private float output;
+    private float response;
+    private float waste;
     private float penalty;
-    private int wait;
+    private float wait;
+
+    public Results(String name,float output,float response,float waste,float penalty,float wait){
+        process = new Process(name);
+        startTime = 0;
+        endTime = 0;
+        this.output = output;
+        this.response = response;
+        this.waste = waste;
+        this.penalty = penalty;
+        this.wait = wait;
+    }
 
     public Results(Process process,int startTime){
         this.process = process;
@@ -43,15 +54,15 @@ public class Results{
         return endTime;
     }
 
-    public int getOutput(){
+    public float getOutput(){
         return output;
     }
 
-    public int getResponse(){
+    public float getResponse(){
         return response;
     }
 
-    public int getWaste(){
+    public float getWaste(){
         return waste;
     }
 
@@ -59,7 +70,7 @@ public class Results{
         return penalty;
     }
 
-    public int getWait(){
+    public float getWait(){
         return wait;
     }
 

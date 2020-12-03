@@ -10,5 +10,14 @@ public class Launcher{
             System.out.println("Error al cargar archivo");
         }
         if(procesos == null) return;
+        Simulator simulador = new Simulator(procesos);
+        for(int i = 0; i < procesos.size(); i++){
+            System.out.println(procesos.get(i).toString());
+        }
+        simulador.ordenarPorLlegada();
+        System.out.println("\n");
+        for(int i = 0; i < procesos.size(); i++){
+            System.out.println(procesos.get(i).toString());
+        }
     }
 }

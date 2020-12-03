@@ -5,6 +5,14 @@ public class Process{
     private int priority;
     private int cpuTime;
 
+    public Process(String id){
+        this.id = id;
+        duration = 0;
+        arriveTime = 0;
+        priority = 0;
+        cpuTime = 0;
+    }
+
     public Process(String id,int priority,int duration,int arriveTime){
         this.id = id;
         this.duration = duration;
