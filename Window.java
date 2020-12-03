@@ -47,12 +47,11 @@ public class Window implements ActionListener{
 
     private void setDefaultSelectorProperties(){
         selector.setBounds(200,200,200,30);
-        selector.addItem("FCFS");
-        selector.addItem("SJF");
-        selector.addItem("SRT");
-        selector.addItem("Round Robin");
-        selector.addItem("Prioridades");
-        //selector.addActionListener(this);
+        selector.addItem(Nombres.fcfs);
+        selector.addItem(Nombres.sjf);
+        selector.addItem(Nombres.srt);
+        selector.addItem(Nombres.roundRobin);
+        selector.addItem(Nombres.prioridades);
     }
 
     private void setDefaultStartProperties(){

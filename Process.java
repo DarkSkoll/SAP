@@ -5,7 +5,7 @@ public class Process{
     private int priority;
     private int cpuTime;
 
-    public Process(String id,int duration,int arriveTime,int priority){
+    public Process(String id,int priority,int duration,int arriveTime){
         this.id = id;
         this.duration = duration;
         this.arriveTime = arriveTime;
@@ -39,5 +39,9 @@ public class Process{
 
     public void compute(){
         cpuTime++;
+    }
+
+    public String toString(){
+        return "ID: "+id+"\nPrioridad: "+priority+"\nDuracion: "+duration+"\nLlegada: "+arriveTime;
     }
 }

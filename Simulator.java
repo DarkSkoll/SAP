@@ -36,29 +36,13 @@ public class Simulator{
         process.compute();
     }
 
-    public void start(){
+    public void reset(){
+        time = 0;
+        for(int i = 0; i < procesos.size(); i++){
+            procesos.get(i).reset();
+        }
     }
 
-    /*public void selectAlgorithm(int option){
-        switch(option){
-            case 1:
-                algorithm = new FCFC(this);
-                break;
-            case 2:
-                algorithm = new SJF(this);
-                break;
-            case 3:
-                algorithm = new SRT(this);
-                break;
-            case 4:
-                algorithm = new RoundRobin(this);
-                break;
-            case 5:
-                algorithm = new Priority(this);
-                break;
-            case default:
-                algorithm = null;
-                break;
-        }
-    }*/
+    public void start(){
+    }
 }
