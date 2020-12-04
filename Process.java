@@ -112,18 +112,20 @@ public class Process{
         wait = startTime - arriveTime;
     }
 
-    public void imprimir(){
-        System.out.println("ID: "+id);
-        System.out.println("Prioridad: "+priority);
-        System.out.println("Duracion: "+duration);
-        System.out.println("Llegada: "+arriveTime);
-        System.out.println("Inicio: "+startTime);
-        System.out.println("Finalización: "+endTime);
-        System.out.println("Output: "+output);
-        System.out.println("Response: "+response);
-        System.out.println("Waste: "+waste);
-        System.out.println("Penalty: "+penalty);
-        System.out.println("Wait: "+wait);
+    public String[] imprimir(){
+        String[] datos = new String[11];
+        datos[0] = id;
+        datos[1] = String.valueOf(priority);
+        datos[2] = String.valueOf(arriveTime);
+        datos[3] = String.valueOf(duration);
+        datos[4] = String.valueOf(startTime);
+        datos[5] = String.valueOf(endTime);
+        datos[6] = String.valueOf(output);
+        datos[7] = String.valueOf(response);
+        datos[8] = String.valueOf(waste);
+        datos[9] = String.valueOf(penalty);
+        datos[10] = String.valueOf(wait);
+        return datos;
     }
 
     public String toString(){

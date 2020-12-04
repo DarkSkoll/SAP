@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class ResultsTableGui extends JPanel{
-    private JTable table;
+    public JTable table;
     private JScrollPane scroll;
 
     public ResultsTableGui(){

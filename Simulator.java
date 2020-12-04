@@ -10,6 +10,7 @@ public class Simulator{
     private Runable algoritmo;
     private InformationGui info;
     private TableTimeGui timeTable;
+    private ResultsTableGui resultados;
 
     public Simulator(ArrayList<Process> procesos){
         this.procesos = procesos;
@@ -27,10 +28,15 @@ public class Simulator{
         this.timeTable = timeTable;
     }
 
+    public void setResultados(ResultsTableGui resultados){
+        this.resultados = resultados;
+    }
+
     public void compute(){
         time++;
         if(current == null) return;
         current.compute();
+        timeTable.table.setValueAt(current.getId(),2,((time-1)*2+1));
     }
 
     public void ordenarPorLlegada(){
@@ -106,11 +112,21 @@ public class Simulator{
     }
 
     public void imprimir(){
+        String[] tmp;
         for(int i = 0; i < procesos.size(); i++){
-            procesos.get(i).imprimir();
+            tmp = procesos.get(i).imprimir();
+            for(int j = 0; j < tmp.length; j++){
+                resultados.table.setValueAt(tmp[j],i,j);
+            }
         }
-        total.imprimir();
-        promedio.imprimir();
+        tmp = total.imprimir();
+        for(int i = 0; i < tmp.length; i++){
+            resultados.table.setValueAt(tmp[i],procesos.size(),i);
+        }
+        tmp = promedio.imprimir();
+        for(int i = 0; i < tmp.length; i++){
+            resultados.table.setValueAt(tmp[i],procesos.size()+1,i);
+        }
     }
 
     public void start(String opcion){
