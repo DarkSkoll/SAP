@@ -51,12 +51,14 @@ public class Process{
         return priority;
     }
 
-    public int getcpuTime(){
+    public int getCpuTime(){
         return cpuTime;
     }
 
     public void reset(){
         cpuTime = 0;
+        startTime = 0;
+        endTime = 0;
     }
 
     public void compute(){

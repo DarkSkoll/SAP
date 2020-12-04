@@ -47,6 +47,14 @@ public class ResultsTableGui extends JPanel{
         table.getTableHeader().setForeground(Color.white);
     }
 
+    public void reset(){
+        for(int i = 0; i < table.getColumnCount(); i++){
+            for(int j = 0; j < table.getRowCount(); j++){
+                table.setValueAt("",j,i);
+            }
+        }
+    }
+
     public void centrar(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);

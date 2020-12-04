@@ -63,6 +63,7 @@ public class Window implements ActionListener{
         simulador.setInfo(info);
         simulador.setTimeTable(time);
         simulador.setResultados(results);
+        simulador.reset();
         simulador.start(selector.getSelectedItem().toString());
     }
 

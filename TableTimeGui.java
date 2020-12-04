@@ -59,6 +59,13 @@ public class TableTimeGui extends JPanel{
         }
     }
 
+    public void reset(){
+        for(int i = 0; i < table.getColumnCount(); i++){
+            table.setValueAt("",0,i);
+            table.setValueAt("",2,i);
+        }
+    }
+
     public void centrar(){
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);

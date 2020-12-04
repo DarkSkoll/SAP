@@ -93,11 +93,11 @@ public class Simulator{
             wait += tmp.getWait();
         }
         total = new Process("Total",output,response,waste,penalty,wait);
-        output /= (procesos.size()-1);
-        response /= (procesos.size()-1);
-        waste /= (procesos.size()-1);
-        penalty /= (procesos.size()-1);
-        wait /= (procesos.size()-1);
+        output /= (procesos.size());
+        response /= (procesos.size());
+        waste /= (procesos.size());
+        penalty /= (procesos.size());
+        wait /= (procesos.size());
         promedio = new Process("Promedio",output,response,waste,penalty,wait);
     }
 
@@ -105,7 +105,10 @@ public class Simulator{
         current = null;
         promedio = null;
         total = null;
+        algoritmo = null;
         time = 0;
+        timeTable.reset();
+        resultados.reset();
         for(int i = 0; i < procesos.size(); i++){
             procesos.get(i).reset();
         }
@@ -130,11 +133,14 @@ public class Simulator{
     }
 
     public void start(String opcion){
-        reset();
         switch(opcion){
             case Nombres.fcfs:
                 System.out.println("FCFS");
                 algoritmo = new FCFS(this,info);
+                break;
+            case Nombres.srt:
+                System.out.println("SRT");
+                algoritmo = new SRT(this,info);
                 break;
             default:
                 System.out.println("Test");
