@@ -11,6 +11,8 @@ public class Simulator{
     private InformationGui info;
     private TableTimeGui timeTable;
     private ResultsTableGui resultados;
+    private int quantum;
+    private Process[] promedios;
 
     public Simulator(ArrayList<Process> procesos){
         this.procesos = procesos;
@@ -18,6 +20,7 @@ public class Simulator{
         current = null;
         promedio = null;
         total = null;
+        promedios = new Process[5];
     }
 
     public void setInfo(InformationGui info){
@@ -30,6 +33,14 @@ public class Simulator{
 
     public void setResultados(ResultsTableGui resultados){
         this.resultados = resultados;
+    }
+
+    public void setQuantum(int quantum){
+        this.quantum = quantum;
+    }
+
+    public int getQuantum(){
+        return quantum;
     }
 
     public void compute(){
@@ -143,11 +154,66 @@ public class Simulator{
             case Nombres.prioridades:
                 algoritmo = new Prioridades(this,info);
                 break;
+            case Nombres.roundRobin:
+                algoritmo = new RoundRobin(this,info);
+                break;
             default:
                 return;
         }
         algoritmo.run();
         calcularResultados();
         imprimir();
+        switch(opcion){
+            case Nombres.fcfs:
+                promedios[0] = promedio;
+                break;
+            case Nombres.srt:
+                promedios[1] = promedio;
+                break;
+            case Nombres.sjf:
+                promedios[2] = promedio;
+                break;
+            case Nombres.prioridades:
+                promedios[4] = promedio;
+                break;
+            case Nombres.roundRobin:
+                promedios[3] = promedio;
+                break;
+            default:
+                return;
+        }
+    }
+
+    public String mejor(){
+        int opc;
+        int i;
+        for(i = 0; i < promedios.length ; i++){
+            if(promedios[i] != null) break;
+        }
+        float min = promedios[i].performance();
+        opc = i;
+        float tmp;
+        for(int j = i+1; j < promedios.length; j++){
+            if(promedios[j] != null){
+                tmp = promedios[j].performance();
+                if(tmp < min){
+                    min = tmp;
+                    opc = j;
+                }
+            }
+        }
+        switch(opc){
+            case 0:
+                return Nombres.fcfs;
+            case 1:
+                return Nombres.srt;
+            case 2:
+                return Nombres.sjf;
+            case 3:
+                return Nombres.roundRobin;
+            case 4:
+                return Nombres.prioridades;
+        }
+        return "";
     }
 }

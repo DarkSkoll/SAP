@@ -102,7 +102,7 @@ public class Process{
     }
 
     public boolean isDone(){
-        if(cpuTime == duration) return true;
+        if(cpuTime >= duration) return true;
         return false;
     }
 
@@ -128,6 +128,12 @@ public class Process{
         datos[9] = String.valueOf(penalty);
         datos[10] = String.valueOf(wait);
         return datos;
+    }
+
+    public float performance(){
+        float peso = output + response + waste + penalty + wait;
+        peso /= 5;
+        return peso;
     }
 
     public String toString(){

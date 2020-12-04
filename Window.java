@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,10 @@ public class Window implements ActionListener{
     private JComboBox<String> selector;
     private JButton start;
     private Simulator simulador;
+    private JTextField quantum;
+    private JLabel mensajeQuantum;
+    private JLabel mensajeMejor;
+    private JLabel mejor;
 
     public Window(Simulator simulador){
         this.simulador = simulador;
@@ -26,6 +31,10 @@ public class Window implements ActionListener{
         info = new InformationGui();
         selector = new JComboBox<String>();
         start = new JButton("Iniciar");
+        quantum = new JTextField("1");
+        mensajeQuantum = new JLabel("Quantum: ");
+        mensajeMejor = new JLabel("<html>El algoritmo con menor<br>Tasa de Penalizacion es:</html>");
+        mejor = new JLabel();
     }
 
     private void setDefaultWindowsProperties(){
@@ -46,7 +55,7 @@ public class Window implements ActionListener{
     }
 
     private void setDefaultSelectorProperties(){
-        selector.setBounds(200,200,200,30);
+        selector.setBounds(50,200,200,30);
         selector.addItem(Nombres.fcfs);
         selector.addItem(Nombres.sjf);
         selector.addItem(Nombres.srt);
@@ -55,8 +64,15 @@ public class Window implements ActionListener{
     }
 
     private void setDefaultStartProperties(){
-        start.setBounds(400,400,200,30);
+        start.setBounds(50,400,200,30);
         start.addActionListener(this);
+        quantum.setBounds(150,300,200,30);
+        mensajeQuantum.setForeground(Color.white);
+        mensajeQuantum.setBounds(50,300,200,30);
+        mensajeMejor.setBounds(400,200,200,30);
+        mensajeMejor.setForeground(Color.white);
+        mejor.setBounds(400,300,200,30);
+        mejor.setForeground(Color.white);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -64,7 +80,10 @@ public class Window implements ActionListener{
         simulador.setTimeTable(time);
         simulador.setResultados(results);
         simulador.reset();
+        simulador.setQuantum(Integer.parseInt(quantum.getText()));
         simulador.start(selector.getSelectedItem().toString());
+        String tmp = simulador.mejor();
+        mejor.setText(tmp);
     }
 
     private void setDefaultResultsTableProperties(){
@@ -89,6 +108,10 @@ public class Window implements ActionListener{
         window.add(info);
         window.add(selector);
         window.add(start);
+        window.add(quantum);
+        window.add(mensajeQuantum);
+        window.add(mensajeMejor);
+        window.add(mejor);
     }
 
     public void createWindow(){
