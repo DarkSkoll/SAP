@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class TableTimeGui extends JPanel{
-    private JTable table;
+    public JTable table;
     private JScrollPane scroll;
     private JLabel L;
     private JLabel U;
@@ -63,7 +63,10 @@ public class TableTimeGui extends JPanel{
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for(int i = 0; i < table.getColumnCount(); i++){
-            table.getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+            //table.getColumnModel().getColumn(i).setMinWidth(50);
+            //table.getColumnModel().getColumn(i).setMaxWidth(50);
+            //table.getColumnModel().getColumn(i).setPreferredWidth(50);
         }
     }
 }

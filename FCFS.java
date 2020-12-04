@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class FCFS implements Runable{
     private ArrayList<Process> cola;
     private Simulator simulador;
+    private InformationGui info;
 
-    public FCFS(Simulator simulador){
+    public FCFS(Simulator simulador,InformationGui info){
         this.simulador = simulador;
+        this.info = info;
         cola = new ArrayList<Process>();
     }
 
@@ -18,9 +20,14 @@ public class FCFS implements Runable{
             simulador.recibirProcesos();
             if(simulador.current == null && !cola.isEmpty()){
                 simulador.current = cola.remove(0);
+                info.setLabelActual(simulador.current.getId());
+                if(!cola.isEmpty()){
+                    info.setLabelCola(cola.get(0).getId());
+                }
                 simulador.current.setStartTime(simulador.time);
             }
             simulador.compute();
+            info.setLabelTiempo(String.valueOf(simulador.time));
             if(simulador.current != null){
                 if(simulador.current.isDone()){
                     simulador.current.setEndTime(simulador.time);
@@ -28,5 +35,13 @@ public class FCFS implements Runable{
                 }
             }
         }while(!simulador.isFinish());
+    }
+
+    public void esperar(){
+        try{
+            Thread.currentThread().sleep(1000);
+        }catch(Exception e){
+            Thread.currentThread().interrupt();
+        }
     }
 }

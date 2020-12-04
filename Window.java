@@ -15,8 +15,9 @@ public class Window implements ActionListener{
     private InformationGui info;
     private JComboBox<String> selector;
     private JButton start;
+    private Simulator simulador;
 
-    public Window(){
+    public Window(Simulator simulador){
         window = new JFrame();
         title = new JLabel();
         results = new ResultsTableGui();
@@ -24,6 +25,7 @@ public class Window implements ActionListener{
         info = new InformationGui();
         selector = new JComboBox<String>();
         start = new JButton("Iniciar");
+        this.simulador = simulador;
     }
 
     private void setDefaultWindowsProperties(){
@@ -58,8 +60,9 @@ public class Window implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Hola");
-        System.out.println(selector.getSelectedItem().toString());
+        simulador.setInfo(info);
+        simulador.setTimeTable(time);
+        simulador.start(selector.getSelectedItem().toString());
     }
 
     private void setDefaultResultsTableProperties(){
@@ -74,7 +77,7 @@ public class Window implements ActionListener{
 
     private void setDefaultInfoProperties(){
         info.setDefaults();
-        info.setBounds(850,250,700,108);
+        info.setBounds(850,300,700,108);
     }
 
     private void addWindowsElements(){

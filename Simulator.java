@@ -1,15 +1,30 @@
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Simulator{
     public ArrayList<Process> procesos;
     public int time;
     public Process current;
-    public Runable algoritmo;
+    private Process total;
+    private Process promedio;
+    private Runable algoritmo;
+    private InformationGui info;
+    private TableTimeGui timeTable;
 
     public Simulator(ArrayList<Process> procesos){
         this.procesos = procesos;
         time = 0;
         current = null;
+        promedio = null;
+        total = null;
+    }
+
+    public void setInfo(InformationGui info){
+        this.info = info;
+    }
+
+    public void setTimeTable(TableTimeGui timeTable){
+        this.timeTable = timeTable;
     }
 
     public void compute(){
@@ -35,12 +50,15 @@ public class Simulator{
 
     public void recibirProcesos(){
         Process tmp;
+        String cell = " ";
         for(int i = 0; i < procesos.size(); i++){
             tmp = procesos.get(i);
             if(tmp.getArriveTime() == time){
+                cell += tmp.getId()+" ";
                 algoritmo.encolar(tmp);
             }
         }
+        timeTable.table.setValueAt(cell,0,time*2);
     }
 
     public boolean isFinish(){
@@ -68,27 +86,46 @@ public class Simulator{
             penalty += tmp.getPenalty();
             wait += tmp.getWait();
         }
-        procesos.add(new Process("Total",output,response,waste,penalty,wait));
+        total = new Process("Total",output,response,waste,penalty,wait);
         output /= (procesos.size()-1);
         response /= (procesos.size()-1);
         waste /= (procesos.size()-1);
         penalty /= (procesos.size()-1);
         wait /= (procesos.size()-1);
-        procesos.add(new Process("Promedio",output,response,waste,penalty,wait));
+        promedio = new Process("Promedio",output,response,waste,penalty,wait);
     }
 
     public void reset(){
         current = null;
+        promedio = null;
+        total = null;
         time = 0;
         for(int i = 0; i < procesos.size(); i++){
             procesos.get(i).reset();
         }
     }
 
-    public void start(){
+    public void imprimir(){
+        for(int i = 0; i < procesos.size(); i++){
+            procesos.get(i).imprimir();
+        }
+        total.imprimir();
+        promedio.imprimir();
+    }
+
+    public void start(String opcion){
         reset();
-        algoritmo = new FCFS(this);
+        switch(opcion){
+            case Nombres.fcfs:
+                System.out.println("FCFS");
+                algoritmo = new FCFS(this,info);
+                break;
+            default:
+                System.out.println("Test");
+                return;
+        }
         algoritmo.run();
         calcularResultados();
+        imprimir();
     }
 }
