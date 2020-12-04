@@ -10,9 +10,9 @@ public class ResultsTableGui extends JPanel{
     public JTable table;
     private JScrollPane scroll;
 
-    public ResultsTableGui(){
+    public ResultsTableGui(int totalProcesos){
         super();
-        table = new JTable(20,11);
+        table = new JTable(totalProcesos,11);
         scroll = new JScrollPane(table);
     }
 

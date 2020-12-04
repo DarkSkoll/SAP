@@ -1,18 +1,33 @@
 import java.util.ArrayList;
 
-public class RoundRobin implements Runable{
+public class Prioridades implements Runable{
     private ArrayList<Process> cola;
     private Simulator simulador;
     private InformationGui info;
-    private int quantum;
 
-    public RoundRobin(Simulator simulador,InformationGui info){
+    public Prioridades(Simulator simulador,InformationGui info){
         this.simulador = simulador;
         this.info = info;
         cola = new ArrayList<Process>();
     }
 
     public void encolar(Process proceso){
+        if(simulador.current != null){
+            if(simulador.current.getPriority() > proceso.getPriority()){
+                cola.add(0,simulador.current);
+                simulador.current = proceso;
+                proceso.setStartTime(simulador.time);
+                return;
+            }
+        }
+        Process tmp;
+        for(int i = 0; i < cola.size(); i++){
+            tmp = cola.get(i);
+            if(tmp.getPriority() > proceso.getPriority()){
+                cola.add(i,proceso);
+                return;
+            }
+        }
         cola.add(proceso);
     }
 
@@ -25,7 +40,11 @@ public class RoundRobin implements Runable{
                 if(!cola.isEmpty()){
                     info.setLabelCola(cola.get(0).getId());
                 }
-                simulador.current.setStartTime(simulador.time);
+                if(simulador.current.getCpuTime() == 0){
+                    simulador.current.setStartTime(simulador.time);
+                }
+            }
+            if(simulador.current != null){
             }
             simulador.compute();
             info.setLabelTiempo(String.valueOf(simulador.time));
@@ -36,9 +55,5 @@ public class RoundRobin implements Runable{
                 }
             }
         }while(!simulador.isFinish());
-    }
-
-    public void setQuantum(int quantum){
-        this.quantum = quantum;
     }
 }

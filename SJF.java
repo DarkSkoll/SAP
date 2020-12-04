@@ -1,17 +1,23 @@
 import java.util.ArrayList;
 
-public class FCFS implements Runable{
+public class SJF implements Runable{
     private ArrayList<Process> cola;
     private Simulator simulador;
     private InformationGui info;
 
-    public FCFS(Simulator simulador,InformationGui info){
+    public SJF(Simulator simulador,InformationGui info){
         this.simulador = simulador;
         this.info = info;
         cola = new ArrayList<Process>();
     }
 
     public void encolar(Process proceso){
+        for(int i = 0; i < cola.size(); i++){
+            if(cola.get(i).getDuration() > proceso.getDuration()){
+                cola.add(i,proceso);
+                return;
+            }
+        }
         cola.add(proceso);
     }
 

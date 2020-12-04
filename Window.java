@@ -18,14 +18,14 @@ public class Window implements ActionListener{
     private Simulator simulador;
 
     public Window(Simulator simulador){
+        this.simulador = simulador;
         window = new JFrame();
         title = new JLabel();
-        results = new ResultsTableGui();
-        time = new TableTimeGui();
+        results = new ResultsTableGui(simulador.numeroProcesos());
+        time = new TableTimeGui(simulador.totalTime());
         info = new InformationGui();
         selector = new JComboBox<String>();
         start = new JButton("Iniciar");
-        this.simulador = simulador;
     }
 
     private void setDefaultWindowsProperties(){

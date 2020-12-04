@@ -39,19 +39,16 @@ public class Simulator{
         timeTable.table.setValueAt(current.getId(),2,((time-1)*2+1));
     }
 
-    public void ordenarPorLlegada(){
-        int min;
-        Process tmp;
+    public int totalTime(){
+        int totalTime = 0;
         for(int i = 0; i < procesos.size(); i++){
-            min = i;
-            for(int j = i; j < procesos.size(); j++){
-                if(procesos.get(j).getArriveTime() < procesos.get(min).getArriveTime()){
-                    min = j;
-                }
-            }
-            tmp = procesos.set(i,procesos.get(min));
-            procesos.set(min,tmp);
+            totalTime += procesos.get(i).getDuration();
         }
+        return totalTime;
+    }
+
+    public int numeroProcesos(){
+        return procesos.size()+2;
     }
 
     public void recibirProcesos(){
@@ -135,15 +132,18 @@ public class Simulator{
     public void start(String opcion){
         switch(opcion){
             case Nombres.fcfs:
-                System.out.println("FCFS");
                 algoritmo = new FCFS(this,info);
                 break;
             case Nombres.srt:
-                System.out.println("SRT");
                 algoritmo = new SRT(this,info);
                 break;
+            case Nombres.sjf:
+                algoritmo = new SJF(this,info);
+                break;
+            case Nombres.prioridades:
+                algoritmo = new Prioridades(this,info);
+                break;
             default:
-                System.out.println("Test");
                 return;
         }
         algoritmo.run();
