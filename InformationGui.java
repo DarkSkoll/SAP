@@ -47,6 +47,12 @@ public class InformationGui extends JPanel{
         procesoActual.setForeground(Color.white);
         procesoCola.setForeground(Color.white);
         conteoTiempo.setForeground(Color.white);
+        mesageActual.setFont(new Font("Mono", Font.BOLD, 14));
+        mesageCola.setFont(new Font("Mono", Font.BOLD, 14));
+        conteoTiempo.setFont(new Font("Mono", Font.BOLD, 14));
+        tiempo.setFont(new Font("Mono", Font.BOLD, 14));
+        procesoCola.setFont(new Font("Mono", Font.BOLD, 14));
+        procesoActual.setFont(new Font("Mono", Font.BOLD, 14));
         this.setLayout(null);
         this.add(mesageActual);
         this.add(mesageCola);

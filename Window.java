@@ -33,7 +33,7 @@ public class Window implements ActionListener{
         start = new JButton("Iniciar");
         quantum = new JTextField("1");
         mensajeQuantum = new JLabel("Quantum: ");
-        mensajeMejor = new JLabel("<html>El algoritmo con menor<br>Tasa de Penalizacion es:</html>");
+        mensajeMejor = new JLabel("<html>El mejor algoritmo es:</html>");
         mejor = new JLabel();
     }
 
@@ -68,11 +68,14 @@ public class Window implements ActionListener{
         start.addActionListener(this);
         quantum.setBounds(150,300,200,30);
         mensajeQuantum.setForeground(Color.white);
+        mensajeQuantum.setFont(new Font("Mono", Font.BOLD, 14));
         mensajeQuantum.setBounds(50,300,200,30);
         mensajeMejor.setBounds(400,200,200,30);
         mensajeMejor.setForeground(Color.white);
-        mejor.setBounds(400,300,200,30);
+        mejor.setBounds(400,250,200,30);
         mejor.setForeground(Color.white);
+        mejor.setFont(new Font("Mono", Font.BOLD, 24));
+        mensajeMejor.setFont(new Font("Mono", Font.BOLD, 14));
     }
 
     public void actionPerformed(ActionEvent e) {

@@ -213,6 +213,8 @@ public class Simulator{
                 return Nombres.roundRobin;
             case 4:
                 return Nombres.prioridades;
+            default:
+                break;
         }
         return "";
     }
